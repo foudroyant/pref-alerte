@@ -1,0 +1,24 @@
+<header class="p-4 dark:bg-gray-800 dark:text-gray-100">
+	<div class="container flex justify-between h-16 mx-auto">
+		<a rel="noopener noreferrer" routerLink="/" aria-label="Back to homepage" class="flex items-center p-2">
+			<img src="assets/logo-title.png" alt="" width="50" height="50">
+		</a>
+		<ul class="items-stretch hidden space-x-3 lg:flex">
+			<li class="flex">
+				<a rel="noopener noreferrer" routerLink="/home" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent dark:text-violet-400 dark:border-violet-400">Accueil</a>
+			</li>
+			<li class="flex">
+				<a rel="noopener noreferrer" routerLink="/" class="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Abonnement</a>
+			</li>
+		</ul>
+		<div class="items-center flex-shrink-0 hidden lg:flex">
+			<a class="self-center px-8 py-3 rounded text-gray-500 cursor-pointer" routerLink="/compte">Mon compte</a>
+			<button class="self-center px-8 py-3 font-semibold rounded bg-red-500 text-white dark:bg-violet-400 dark:text-gray-900">Deconnexion</button>
+		</div>
+		<button class="p-4 lg:hidden">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 dark:text-gray-100">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+			</svg>
+		</button>
+	</div>
+</header>

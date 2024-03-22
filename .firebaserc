@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "djowyett": {
+      "hosting": {
+        "pref-alerte": [
+          "pref-alert"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "djowyett"
+  }
+}
