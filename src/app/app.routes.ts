@@ -7,11 +7,19 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { PrefectureComponent } from './pages/prefecture/prefecture.component';
 import { CompteComponent } from './pages/compte/compte.component';
+import { inject } from '@angular/core';
+import { AuthService } from './shared/auth.service';
 
 export const routes: Routes = [
     {path : '', component : MainComponent},
-    {path : 'home', component : HomeComponent},
-    {path : 'prefecture', component : PrefectureComponent},
+    {
+        path : "",
+        canMatch : [()=>inject(AuthService).isAuthentificated],
+        children : [
+            {path : "home", component : HomeComponent},
+            {path : 'prefecture', component : PrefectureComponent},
+        ]
+    },
     {path : 'payement', component : PayementComponent},
     {path : 'signIn', component : SignInComponent},
     {path : 'signUp', component : SignUpComponent},
