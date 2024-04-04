@@ -11,7 +11,9 @@ import { AuthService } from '../../shared/auth.service';
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
+
 export class SignInComponent {
+
   private authService = inject(AuthService)
   private router = inject(Router)
   user = {
@@ -20,7 +22,7 @@ export class SignInComponent {
   }
 
   ngOnInit(){
-    
+    this.authService.check_user_connection()
   }
 
   onSubmit() {

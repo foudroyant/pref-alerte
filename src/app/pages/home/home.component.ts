@@ -18,10 +18,11 @@ export class HomeComponent {
   private router = inject(Router)
   
   prefectures : ModelPrefecture[] = []
+  credits : number = 0
 
   async ngOnInit(){
     this.prefectures = await this.service.getPrefectures()
-    console.log(this.prefectures)
+    this.credits = (await this.service.getUserData()).credits
   }
 
   go_to_motifs(index : number){

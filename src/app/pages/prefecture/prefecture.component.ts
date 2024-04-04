@@ -13,12 +13,38 @@ import { ModelMotif, ModelPrefecture } from '../../shared/model';
 })
 export class PrefectureComponent {
 
+  phone_number : string = ""
+  links : string[] = []
+  credits : number = 0
+
   service = inject(AuthService)
   private router = inject(Router)
   prefecture : ModelPrefecture | undefined
+  index : number |undefined
 
   ngOnInit(){
-    const index = Number.parseInt(localStorage.getItem("index")!)
-    this.prefecture = this.service.prefectures[index]
+    this.index = Number.parseInt(localStorage.getItem("index")!)
+    this.prefecture = this.service.prefectures[this.index]
+    this.service.getUserData().then(res=>{
+      this.links = res.links
+      this.credits = res.credits
+      this.phone_number = res.phone
+      console.log(this.links)
+    })
+  }
+
+  getNotifs(motif : ModelMotif){
+    if(this.credits <1 ){
+      alert("Vous n'avez pas de crédits pour vous abonner")
+    }
+    else {
+      this.service.subscribe_motif(motif)
+    }
+    
+  }
+
+  removeNotifs(motif : ModelMotif){
+    this.service.desubscribe_motif(motif)
+    this.prefecture = this.service.prefectures[this.index!]
   }
 }

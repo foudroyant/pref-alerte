@@ -10,3 +10,8 @@ export interface ModelMotif {
     motif : string,
     lien : string
 }
+
+export interface ModelUserData {
+    motifs : string [],
+    phone_number : string
+}

@@ -25,11 +25,11 @@
                         {{motif.motif}}
                     </p>
     
-                    <a routerLink="/home" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </a>
+                    @if (!links.includes(motif.lien)) {
+                        <button (click)="getNotifs(motif)" class="w-full sm:w-auto px-9 py-4   mb-4  text-base   font-semibold focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200 rounded-md block  border-b border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700">Recevoir les notifications</button>
+                    } @else {
+                        <button (click)="removeNotifs(motif)" class="w-full sm:w-auto px-8 py-3.5 mb-4  text-base   font-semibold focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200 rounded-md block  border-b border-red-300    bg-red-200 hover:bg-red-300 text-red-900">Se désabonner</button>
+                    }
                 </div>
             } @empty {
                 <h1 class="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">Aucun motif pour l'instant</h1>

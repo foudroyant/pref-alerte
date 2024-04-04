@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { collection, doc, getDocs, getFirestore, setDoc } from '@angular/fire/firestore';
-import { ModelPrefecture } from './model';
+import { collection, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc  } from '@angular/fire/firestore';
+import { ModelMotif, ModelPrefecture, ModelUserData } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,11 @@ export class AuthService {
   private auth: Auth = inject(Auth);
   private router = inject(Router)
   db = getFirestore();
+
   prefectures : ModelPrefecture [] = []
+  links : string [] = []
+  phone_number : string = ""
+  userData : ModelUserData | undefined
 
   constructor() { }
 
@@ -27,7 +31,7 @@ export class AuthService {
         this.isAuthentificated = true
         this.user = res.user
         await setDoc(doc(this.db, "users", this.user?.uid!), {
-          phone: "",
+          phone_number: "",
           motifs: [],
         });
         this.router.navigate(["/home"])
@@ -79,5 +83,65 @@ export class AuthService {
       })
     });
     return this.prefectures
+  }
+
+  async getUserData(){
+    const userRef = await doc(this.db, "users", this.user?.uid!)
+    const userDoc = await getDoc(userRef);
+    this.phone_number = userDoc.data()!["phone_number"]
+    this.links = userDoc.data()!["motifs"]
+    
+    localStorage.setItem("phone", this.phone_number)
+    localStorage.setItem("credits", userDoc.data()!["credits"])
+    return {
+      "phone" : this.phone_number,
+      "links" : this.links,
+      "credits" : userDoc.data()!["credits"]
+    }
+  }
+
+  async subscribe_motif(motif : ModelMotif){
+    let _motifs :string[] = [""]
+    const userRef = await doc(this.db, "users", this.user?.uid!)
+    const userDoc = await getDoc(userRef);
+    _motifs = userDoc.data()!["motifs"]
+    _motifs.push(motif.lien)
+    await updateDoc(userRef, {
+      motifs : _motifs
+    });
+    alert("Vous êtes maintenant abonné à ce motif")
+  }
+
+  async desubscribe_motif(motif : ModelMotif){
+    let _motifs :string[] = [""]
+    const userRef = await doc(this.db, "users", this.user?.uid!)
+    const userDoc = await getDoc(userRef);
+    _motifs = userDoc.data()!["motifs"]
+    _motifs.splice(_motifs.indexOf(motif.lien), 1)
+    await updateDoc(userRef, {
+      motifs : _motifs
+    });
+    alert("Vous êtes maintenant désabonné à ce motif")
+  }
+
+  async updatePhone(phone : string){
+    const userRef = await doc(this.db, "users", this.user?.uid!)
+    const userDoc = await getDoc(userRef);
+    await updateDoc(userRef, {
+      phone_number : phone
+    });
+    localStorage.setItem("phone", phone)
+  }
+
+  check_user_connection(){
+    this.user = JSON.parse(localStorage.getItem("user")!)
+    console.log(this.user)
+    if(this.user != undefined){
+      this.isAuthentificated = true
+      this.router.navigate(["/home"])
+    }
+    else {
+      this.router.navigate(["/signIn"])
+    }
   }
 }
