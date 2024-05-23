@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "messagerie",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "client",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}
