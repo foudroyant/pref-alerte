@@ -1,5 +1,5 @@
 name: pref_alerte
-description: A new Flutter project.
+description: Application d'alerte de disponibilité de créneaux des préfectures.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

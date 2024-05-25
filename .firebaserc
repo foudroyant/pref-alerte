@@ -1,14 +1,19 @@
 {
+  "projects": {
+    "default": "djowyett"
+  },
   "targets": {
     "djowyett": {
       "hosting": {
         "pref-alerte": [
           "pref-alert"
+        ],
+        "prefalerte": [
+          "prefalerte"
         ]
       }
     }
   },
-  "projects": {
-    "default": "djowyett"
-  }
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
