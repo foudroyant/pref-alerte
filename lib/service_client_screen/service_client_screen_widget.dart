@@ -186,10 +186,11 @@ class _ServiceClientScreenWidgetState extends State<ServiceClientScreenWidget> {
                     } else {
                       await launchUrl(Uri(
                           scheme: 'mailto',
-                          path: 'stephanebazebibouta@gmail.com',
+                          path: 'contact@prefalerte.com',
                           query: {
                             'subject': 'Demande d\'aide',
-                            'body': 'Voilà mon message',
+                            'body':
+                                'Bonjour chèr service client de Prefalerte !',
                           }
                               .entries
                               .map((MapEntry<String, String> e) =>

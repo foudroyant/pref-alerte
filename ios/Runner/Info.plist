@@ -54,7 +54,8 @@
 	<true/>
 
 
-
+	<key>PermissionGroupNotification</key>
+    <string>Vous devez accepter les notifications pour recevoir les alertes de créneaux sur votre mobile</string>
 
 
 	<key>UILaunchStoryboardName</key>
