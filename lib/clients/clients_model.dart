@@ -6,26 +6,18 @@ import 'package:flutter/material.dart';
 class ClientsModel extends FlutterFlowModel<ClientsWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Models for resume_message_component dynamic component.
   late FlutterFlowDynamicModels<ResumeMessageComponentModel>
-      resumeMessageComponentModels1;
-  // Models for resume_message_component dynamic component.
-  late FlutterFlowDynamicModels<ResumeMessageComponentModel>
-      resumeMessageComponentModels2;
+      resumeMessageComponentModels;
 
   @override
   void initState(BuildContext context) {
-    resumeMessageComponentModels1 =
-        FlutterFlowDynamicModels(() => ResumeMessageComponentModel());
-    resumeMessageComponentModels2 =
+    resumeMessageComponentModels =
         FlutterFlowDynamicModels(() => ResumeMessageComponentModel());
   }
 
   @override
   void dispose() {
-    unfocusNode.dispose();
-    resumeMessageComponentModels1.dispose();
-    resumeMessageComponentModels2.dispose();
+    resumeMessageComponentModels.dispose();
   }
 }

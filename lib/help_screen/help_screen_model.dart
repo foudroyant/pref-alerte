@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class HelpScreenModel extends FlutterFlowModel<HelpScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for help_component component.
   late HelpComponentModel helpComponentModel1;
   // Model for help_component component.
@@ -20,7 +19,6 @@ class HelpScreenModel extends FlutterFlowModel<HelpScreenWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     helpComponentModel1.dispose();
     helpComponentModel2.dispose();
   }

@@ -19,7 +19,6 @@ class AbonnementsModel extends FlutterFlowModel<AbonnementsWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Firestore Query - Query a collection] action in Abonnements widget.
   List<PrefecturesRecord>? baPrefectures;
 
@@ -27,7 +26,5 @@ class AbonnementsModel extends FlutterFlowModel<AbonnementsWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 }

@@ -9,6 +9,8 @@ import 'schema/prefectures_record.dart';
 import 'schema/users_record.dart';
 import 'schema/abonnement_record.dart';
 import 'schema/messagerie_record.dart';
+import 'schema/pricing_record.dart';
+import 'schema/suppression_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -21,6 +23,8 @@ export 'schema/prefectures_record.dart';
 export 'schema/users_record.dart';
 export 'schema/abonnement_record.dart';
 export 'schema/messagerie_record.dart';
+export 'schema/pricing_record.dart';
+export 'schema/suppression_record.dart';
 
 /// Functions to query PrefecturesRecords (as a Stream and as a Future).
 Future<int> queryPrefecturesRecordCount({
@@ -168,6 +172,80 @@ Future<List<MessagerieRecord>> queryMessagerieRecordOnce({
     queryCollectionOnce(
       MessagerieRecord.collection,
       MessagerieRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query PricingRecords (as a Stream and as a Future).
+Future<int> queryPricingRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      PricingRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<PricingRecord>> queryPricingRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      PricingRecord.collection,
+      PricingRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<PricingRecord>> queryPricingRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      PricingRecord.collection,
+      PricingRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query SuppressionRecords (as a Stream and as a Future).
+Future<int> querySuppressionRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      SuppressionRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<SuppressionRecord>> querySuppressionRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      SuppressionRecord.collection,
+      SuppressionRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<SuppressionRecord>> querySuppressionRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      SuppressionRecord.collection,
+      SuppressionRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

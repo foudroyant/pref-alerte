@@ -9,10 +9,14 @@ class ChangerNumeroModel extends FlutterFlowModel<ChangerNumeroWidget> {
   FocusNode? telephoneFocusNode1;
   TextEditingController? telephoneTextController1;
   String? Function(BuildContext, String?)? telephoneTextController1Validator;
+  // Stores action output result for [Custom Action - checkNumero] action in Button widget.
+  bool? numeroIsGood;
   // State field(s) for telephone widget.
   FocusNode? telephoneFocusNode2;
   TextEditingController? telephoneTextController2;
   String? Function(BuildContext, String?)? telephoneTextController2Validator;
+  // Stores action output result for [Custom Action - checkNumero] action in Button widget.
+  bool? numeroIsGood2;
 
   @override
   void initState(BuildContext context) {}

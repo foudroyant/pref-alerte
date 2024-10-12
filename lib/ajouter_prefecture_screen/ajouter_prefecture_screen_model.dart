@@ -8,7 +8,6 @@ class AjouterPrefectureScreenModel
     extends FlutterFlowModel<AjouterPrefectureScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for m_prefecture widget.
   FocusNode? mPrefectureFocusNode;
   TextEditingController? mPrefectureTextController;
@@ -44,7 +43,6 @@ class AjouterPrefectureScreenModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     mPrefectureFocusNode?.dispose();
     mPrefectureTextController?.dispose();
 

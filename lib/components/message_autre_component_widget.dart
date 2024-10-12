@@ -44,7 +44,7 @@ class _MessageAutreComponentWidgetState
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -149,7 +149,7 @@ class _MessageAutreComponentWidgetState
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                   child: Text(
-                    dateTimeFormat('d/M H:mm', widget.message!.date!),
+                    dateTimeFormat("d/M H:mm", widget.message!.date!),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Manrope',
                           color: FlutterFlowTheme.of(context).secondaryText,

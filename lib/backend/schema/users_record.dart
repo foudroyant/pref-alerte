@@ -70,6 +70,16 @@ class UsersRecord extends FirestoreRecord {
   String get app => _app ?? '';
   bool hasApp() => _app != null;
 
+  // "root" field.
+  bool? _root;
+  bool get root => _root ?? false;
+  bool hasRoot() => _root != null;
+
+  // "player_id" field.
+  String? _playerId;
+  String get playerId => _playerId ?? '';
+  bool hasPlayerId() => _playerId != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -82,6 +92,8 @@ class UsersRecord extends FirestoreRecord {
     _plan = snapshotData['plan'] as String?;
     _motifs = getDataList(snapshotData['motifs']);
     _app = snapshotData['app'] as String?;
+    _root = snapshotData['root'] as bool?;
+    _playerId = snapshotData['player_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -128,6 +140,8 @@ Map<String, dynamic> createUsersRecordData({
   String? role,
   String? plan,
   String? app,
+  bool? root,
+  String? playerId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -141,6 +155,8 @@ Map<String, dynamic> createUsersRecordData({
       'role': role,
       'plan': plan,
       'app': app,
+      'root': root,
+      'player_id': playerId,
     }.withoutNulls,
   );
 
@@ -163,7 +179,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.role == e2?.role &&
         e1?.plan == e2?.plan &&
         listEquality.equals(e1?.motifs, e2?.motifs) &&
-        e1?.app == e2?.app;
+        e1?.app == e2?.app &&
+        e1?.root == e2?.root &&
+        e1?.playerId == e2?.playerId;
   }
 
   @override
@@ -178,7 +196,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.role,
         e?.plan,
         e?.motifs,
-        e?.app
+        e?.app,
+        e?.root,
+        e?.playerId
       ]);
 
   @override

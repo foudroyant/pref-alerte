@@ -73,14 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const AuthentificationWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const OnboardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const NavBarPage()
-              : const AuthentificationWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const NavBarPage() : const OnboardingWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -121,6 +120,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Profile',
           path: '/profile',
+          requireAuth: true,
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'Profile')
               : const ProfileWidget(),
@@ -138,7 +138,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'prefectures_screen',
           path: '/prefecturesScreen',
-          builder: (context, params) => const PrefecturesScreenWidget(),
+          asyncParams: {
+            'prefectures':
+                getDocList(['prefectures'], PrefecturesRecord.fromSnapshot),
+          },
+          builder: (context, params) => PrefecturesScreenWidget(
+            prefectures: params.getParam<PrefecturesRecord>(
+              'prefectures',
+              ParamType.Document,
+              isList: true,
+            ),
+          ),
         ),
         FFRoute(
           name: 'ajouter_prefecture_screen',
@@ -210,6 +220,64 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'conditions_Screen',
           path: '/conditionsScreen',
           builder: (context, params) => const ConditionsScreenWidget(),
+        ),
+        FFRoute(
+          name: 'onboarding',
+          path: '/onboarding',
+          builder: (context, params) => const OnboardingWidget(),
+        ),
+        FFRoute(
+          name: 'PricingSet',
+          path: '/pricingSet',
+          requireAuth: true,
+          builder: (context, params) => const PricingSetWidget(),
+        ),
+        FFRoute(
+          name: 'Update_Pricing',
+          path: '/updatePricing',
+          asyncParams: {
+            'pricing': getDoc(['pricing'], PricingRecord.fromSnapshot),
+          },
+          builder: (context, params) => UpdatePricingWidget(
+            pricing: params.getParam(
+              'pricing',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'DeleteCompte',
+          path: '/deleteCompte',
+          requireAuth: true,
+          builder: (context, params) => const DeleteCompteWidget(),
+        ),
+        FFRoute(
+          name: 'search',
+          path: '/search',
+          asyncParams: {
+            'prefectures':
+                getDocList(['prefectures'], PrefecturesRecord.fromSnapshot),
+          },
+          builder: (context, params) => SearchWidget(
+            prefectures: params.getParam<PrefecturesRecord>(
+              'prefectures',
+              ParamType.Document,
+              isList: true,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Client',
+          path: '/client',
+          asyncParams: {
+            'user': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ClientWidget(
+            user: params.getParam(
+              'user',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -382,7 +450,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/authentification';
+            return '/onboarding';
           }
           return null;
         },

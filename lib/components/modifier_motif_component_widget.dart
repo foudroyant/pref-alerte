@@ -39,9 +39,8 @@ class _ModifierMotifComponentWidgetState
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.motifs = widget.prefecture!.motifs.toList().cast<MotifStruct>();
-      });
+      _model.motifs = widget.prefecture!.motifs.toList().cast<MotifStruct>();
+      safeSetState(() {});
     });
 
     _model.motifSmallTextController ??= TextEditingController(
@@ -60,7 +59,7 @@ class _ModifierMotifComponentWidgetState
         text: (widget.prefecture?.motifs[widget.indexMotif!])?.lien);
     _model.lienLargeFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -112,7 +111,7 @@ class _ModifierMotifComponentWidgetState
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                           ),
@@ -261,17 +260,15 @@ class _ModifierMotifComponentWidgetState
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  setState(() {
-                                    _model.updateMotifsAtIndex(
-                                      widget.indexMotif!,
-                                      (_) => MotifStruct(
-                                        lien:
-                                            _model.lienSmallTextController.text,
-                                        motif: _model
-                                            .motifSmallTextController.text,
-                                      ),
-                                    );
-                                  });
+                                  _model.updateMotifsAtIndex(
+                                    widget.indexMotif!,
+                                    (_) => MotifStruct(
+                                      lien: _model.lienSmallTextController.text,
+                                      motif:
+                                          _model.motifSmallTextController.text,
+                                    ),
+                                  );
+                                  safeSetState(() {});
 
                                   await widget.prefecture!.reference.update({
                                     ...mapToFirestore(
@@ -347,7 +344,7 @@ class _ModifierMotifComponentWidgetState
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                           ),
@@ -496,17 +493,15 @@ class _ModifierMotifComponentWidgetState
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  setState(() {
-                                    _model.updateMotifsAtIndex(
-                                      widget.indexMotif!,
-                                      (_) => MotifStruct(
-                                        lien:
-                                            _model.lienLargeTextController.text,
-                                        motif: _model
-                                            .motifLargeTextController.text,
-                                      ),
-                                    );
-                                  });
+                                  _model.updateMotifsAtIndex(
+                                    widget.indexMotif!,
+                                    (_) => MotifStruct(
+                                      lien: _model.lienLargeTextController.text,
+                                      motif:
+                                          _model.motifLargeTextController.text,
+                                    ),
+                                  );
+                                  safeSetState(() {});
 
                                   await widget.prefecture!.reference.update({
                                     ...mapToFirestore(

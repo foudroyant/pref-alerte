@@ -55,7 +55,7 @@ class _ModifierPrefectureScreenWidgetState
         TextEditingController(text: widget.prefecture?.indicatif);
     _model.indicatifFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,9 +68,7 @@ class _ModifierPrefectureScreenWidgetState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -94,7 +92,7 @@ class _ModifierPrefectureScreenWidgetState
           title: Text(
             'Modifier la prefecture',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,

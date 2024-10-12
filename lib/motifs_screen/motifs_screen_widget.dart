@@ -32,7 +32,7 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
     super.initState();
     _model = createModel(context, () => MotifsScreenModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,9 +45,7 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -60,9 +58,7 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
               context: context,
               builder: (context) {
                 return GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
+                  onTap: () => FocusScope.of(context).unfocus(),
                   child: Padding(
                     padding: MediaQuery.viewInsetsOf(context),
                     child: SizedBox(
@@ -104,7 +100,7 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
           title: Text(
             'Les motifs',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,
@@ -119,6 +115,7 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
           child: Builder(
             builder: (context) {
               final baMotifs = widget.prefecture?.motifs.toList() ?? [];
+
               return ListView.builder(
                 padding: const EdgeInsets.fromLTRB(
                   0,
@@ -224,12 +221,8 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
                                     context: context,
                                     builder: (context) {
                                       return GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
+                                        onTap: () =>
+                                            FocusScope.of(context).unfocus(),
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
@@ -436,12 +429,8 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
                                             context: context,
                                             builder: (context) {
                                               return GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
+                                                onTap: () =>
+                                                    FocusScope.of(context)
                                                         .unfocus(),
                                                 child: Padding(
                                                   padding:

@@ -31,7 +31,7 @@ class _EmptyWidgetState extends State<EmptyWidget> {
     super.initState();
     _model = createModel(context, () => EmptyModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -63,7 +63,7 @@ class _EmptyWidgetState extends State<EmptyWidget> {
                 ),
           ),
           Lottie.asset(
-            'assets/lottie_animations/empty.json',
+            'assets/jsons/empty.json',
             height: 300.0,
             fit: BoxFit.cover,
             animate: true,

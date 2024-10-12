@@ -24,7 +24,7 @@ class _ClientsWidgetState extends State<ClientsWidget> {
     super.initState();
     _model = createModel(context, () => ClientsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -37,9 +37,7 @@ class _ClientsWidgetState extends State<ClientsWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -63,7 +61,7 @@ class _ClientsWidgetState extends State<ClientsWidget> {
           title: Text(
             'Gestion des clients',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,
@@ -98,6 +96,7 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                 );
               }
               List<UsersRecord> listViewUsersRecordList = snapshot.data!;
+
               return ListView.builder(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
@@ -108,14 +107,13 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                   return Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      if ((listViewUsersRecord.role != 'admin') &&
-                          responsiveVisibility(
-                            context: context,
-                            tablet: false,
-                            tabletLandscape: false,
-                            desktop: false,
-                          ))
-                        Padding(
+                      Container(
+                        width:
+                            MediaQuery.sizeOf(context).width < kBreakpointSmall
+                                ? MediaQuery.sizeOf(context).width
+                                : (MediaQuery.sizeOf(context).width * 0.5),
+                        decoration: const BoxDecoration(),
+                        child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 5.0, 10.0, 5.0),
                           child: InkWell(
@@ -125,15 +123,15 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               context.pushNamed(
-                                'Messagerie_Screen',
+                                'Client',
                                 queryParameters: {
-                                  'client': serializeParam(
+                                  'user': serializeParam(
                                     listViewUsersRecord,
                                     ParamType.Document,
                                   ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
-                                  'client': listViewUsersRecord,
+                                  'user': listViewUsersRecord,
                                 },
                               );
                             },
@@ -156,12 +154,8 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                                   children: [
                                     if (listViewUsersRecord.photoUrl != '')
                                       Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.15,
-                                        height:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.15,
+                                        width: 100.0,
+                                        height: 100.0,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
@@ -199,30 +193,30 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
-                                          Text(
-                                            listViewUsersRecord.phoneNumber,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Roboto',
-                                                  color: listViewUsersRecord
-                                                              .credits >=
-                                                          1
-                                                      ? FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground
-                                                      : FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  fontSize: 18.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
+                                          if (listViewUsersRecord.phoneNumber !=
+                                                  '')
+                                            Text(
+                                              listViewUsersRecord.phoneNumber,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Roboto',
+                                                    color: listViewUsersRecord
+                                                                .credits >=
+                                                            1
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryBackground
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
                                           Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.6,
                                             decoration: const BoxDecoration(),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -355,27 +349,20 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                                                         ),
                                                   ),
                                                 ),
-                                              ],
+                                              ].divide(const SizedBox(width: 20.0)),
                                             ),
                                           ),
                                           Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.6,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
+                                            decoration: const BoxDecoration(),
                                             child: wrapWithModel(
                                               model: _model
-                                                  .resumeMessageComponentModels1
+                                                  .resumeMessageComponentModels
                                                   .getModel(
                                                 listViewIndex.toString(),
                                                 listViewIndex,
                                               ),
                                               updateCallback: () =>
-                                                  setState(() {}),
+                                                  safeSetState(() {}),
                                               child:
                                                   ResumeMessageComponentWidget(
                                                 key: Key(
@@ -395,300 +382,7 @@ class _ClientsWidgetState extends State<ClientsWidget> {
                             ),
                           ),
                         ),
-                      if ((listViewUsersRecord.role != 'admin') &&
-                          responsiveVisibility(
-                            context: context,
-                            phone: false,
-                          ))
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.5,
-                          decoration: const BoxDecoration(),
-                          child: Visibility(
-                            visible: responsiveVisibility(
-                              context: context,
-                              phone: false,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 10.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed(
-                                    'Messagerie_Screen',
-                                    queryParameters: {
-                                      'client': serializeParam(
-                                        listViewUsersRecord,
-                                        ParamType.Document,
-                                      ),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      'client': listViewUsersRecord,
-                                    },
-                                  );
-                                },
-                                child: Card(
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  color: listViewUsersRecord.credits >= 1
-                                      ? FlutterFlowTheme.of(context).success
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                  elevation: 4.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 10.0, 10.0, 10.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        if (listViewUsersRecord.photoUrl != '')
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.1,
-                                            height: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.1,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              listViewUsersRecord.photoUrl,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 10.0, 15.0, 10.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                listViewUsersRecord.email,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Roboto',
-                                                      color: listViewUsersRecord
-                                                                  .credits >=
-                                                              1
-                                                          ? FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryBackground
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontSize: 16.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                              ),
-                                              Text(
-                                                listViewUsersRecord.phoneNumber,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Roboto',
-                                                      color: listViewUsersRecord
-                                                                  .credits >=
-                                                              1
-                                                          ? FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryBackground
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontSize: 18.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                              ),
-                                              Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.3,
-                                                decoration: const BoxDecoration(),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    RichText(
-                                                      textScaler:
-                                                          MediaQuery.of(context)
-                                                              .textScaler,
-                                                      text: TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text: 'Plan : ',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Manrope',
-                                                                  color: listViewUsersRecord
-                                                                              .credits >=
-                                                                          1
-                                                                      ? FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground
-                                                                      : FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                          ),
-                                                          TextSpan(
-                                                            text:
-                                                                listViewUsersRecord
-                                                                    .plan,
-                                                            style: TextStyle(
-                                                              color: listViewUsersRecord
-                                                                          .credits >=
-                                                                      1
-                                                                  ? FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground
-                                                                  : FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                            ),
-                                                          )
-                                                        ],
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Manrope',
-                                                              fontSize: 16.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                    RichText(
-                                                      textScaler:
-                                                          MediaQuery.of(context)
-                                                              .textScaler,
-                                                      text: TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text: 'Credits : ',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Manrope',
-                                                                  color: listViewUsersRecord
-                                                                              .credits >=
-                                                                          1
-                                                                      ? FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground
-                                                                      : FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                          ),
-                                                          TextSpan(
-                                                            text:
-                                                                listViewUsersRecord
-                                                                    .credits
-                                                                    .toString(),
-                                                            style: TextStyle(
-                                                              color: listViewUsersRecord
-                                                                          .credits >=
-                                                                      1
-                                                                  ? FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground
-                                                                  : FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                            ),
-                                                          )
-                                                        ],
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Manrope',
-                                                              fontSize: 16.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.3,
-                                                decoration: const BoxDecoration(),
-                                                child: wrapWithModel(
-                                                  model: _model
-                                                      .resumeMessageComponentModels2
-                                                      .getModel(
-                                                    listViewIndex.toString(),
-                                                    listViewIndex,
-                                                  ),
-                                                  updateCallback: () =>
-                                                      setState(() {}),
-                                                  child:
-                                                      ResumeMessageComponentWidget(
-                                                    key: Key(
-                                                      'Keyitu_${listViewIndex.toString()}',
-                                                    ),
-                                                    client: listViewUsersRecord
-                                                        .reference,
-                                                  ),
-                                                ),
-                                              ),
-                                            ].divide(const SizedBox(height: 10.0)),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                      ),
                     ],
                   );
                 },

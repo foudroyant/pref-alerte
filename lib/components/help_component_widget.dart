@@ -25,7 +25,7 @@ class _HelpComponentWidgetState extends State<HelpComponentWidget> {
     super.initState();
     _model = createModel(context, () => HelpComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

@@ -19,12 +19,14 @@ class AbonnementModelStruct extends FFFirebaseStruct {
   String? _prefecture;
   String get prefecture => _prefecture ?? '';
   set prefecture(String? val) => _prefecture = val;
+
   bool hasPrefecture() => _prefecture != null;
 
   // "motif" field.
   String? _motif;
   String get motif => _motif ?? '';
   set motif(String? val) => _motif = val;
+
   bool hasMotif() => _motif != null;
 
   static AbonnementModelStruct fromMap(Map<String, dynamic> data) =>

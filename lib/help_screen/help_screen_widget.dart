@@ -23,7 +23,7 @@ class _HelpScreenWidgetState extends State<HelpScreenWidget> {
     super.initState();
     _model = createModel(context, () => HelpScreenModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -36,9 +36,7 @@ class _HelpScreenWidgetState extends State<HelpScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -62,7 +60,7 @@ class _HelpScreenWidgetState extends State<HelpScreenWidget> {
           title: Text(
             'Page d\'aide',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,
@@ -84,7 +82,7 @@ class _HelpScreenWidgetState extends State<HelpScreenWidget> {
               ))
                 wrapWithModel(
                   model: _model.helpComponentModel1,
-                  updateCallback: () => setState(() {}),
+                  updateCallback: () => safeSetState(() {}),
                   child: const HelpComponentWidget(),
                 ),
               if (responsiveVisibility(
@@ -101,7 +99,7 @@ class _HelpScreenWidgetState extends State<HelpScreenWidget> {
                     ),
                     child: wrapWithModel(
                       model: _model.helpComponentModel2,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const HelpComponentWidget(),
                     ),
                   ),

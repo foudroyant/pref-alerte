@@ -25,3 +25,9 @@ export '/authentification_copy/authentification_copy_widget.dart'
 export '/help_screen/help_screen_widget.dart' show HelpScreenWidget;
 export '/conditions_screen/conditions_screen_widget.dart'
     show ConditionsScreenWidget;
+export '/onboarding/onboarding_widget.dart' show OnboardingWidget;
+export '/pricing_set/pricing_set_widget.dart' show PricingSetWidget;
+export '/update_pricing/update_pricing_widget.dart' show UpdatePricingWidget;
+export '/delete_compte/delete_compte_widget.dart' show DeleteCompteWidget;
+export '/search/search_widget.dart' show SearchWidget;
+export '/client/client_widget.dart' show ClientWidget;

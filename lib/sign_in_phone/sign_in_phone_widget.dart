@@ -28,7 +28,7 @@ class _SignInPhoneWidgetState extends State<SignInPhoneWidget> {
     _model.phoneFocusNode ??= FocusNode();
 
     authManager.handlePhoneAuthStateChanges(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -41,9 +41,7 @@ class _SignInPhoneWidgetState extends State<SignInPhoneWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -53,7 +51,7 @@ class _SignInPhoneWidgetState extends State<SignInPhoneWidget> {
           title: Text(
             'Pref Alerte',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 30.0,
                   letterSpacing: 0.0,
@@ -104,7 +102,7 @@ class _SignInPhoneWidgetState extends State<SignInPhoneWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
-                                    fontFamily: 'Outfit',
+                                    fontFamily: 'Roboto',
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -123,7 +121,7 @@ class _SignInPhoneWidgetState extends State<SignInPhoneWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .displaySmall
                                       .override(
-                                        fontFamily: 'Outfit',
+                                        fontFamily: 'Roboto',
                                         letterSpacing: 0.0,
                                       ),
                                 ),

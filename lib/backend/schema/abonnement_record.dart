@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import '/backend/schema/util/firestore_util.dart';
 
 import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class AbonnementRecord extends FirestoreRecord {
   AbonnementRecord._(
@@ -24,11 +25,17 @@ class AbonnementRecord extends FirestoreRecord {
   String get motif => _motif ?? '';
   bool hasMotif() => _motif != null;
 
+  // "sousPrefecture" field.
+  String? _sousPrefecture;
+  String get sousPrefecture => _sousPrefecture ?? '';
+  bool hasSousPrefecture() => _sousPrefecture != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _prefecture = snapshotData['prefecture'] as String?;
     _motif = snapshotData['motif'] as String?;
+    _sousPrefecture = snapshotData['sousPrefecture'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -73,11 +80,13 @@ class AbonnementRecord extends FirestoreRecord {
 Map<String, dynamic> createAbonnementRecordData({
   String? prefecture,
   String? motif,
+  String? sousPrefecture,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'prefecture': prefecture,
       'motif': motif,
+      'sousPrefecture': sousPrefecture,
     }.withoutNulls,
   );
 
@@ -89,12 +98,14 @@ class AbonnementRecordDocumentEquality implements Equality<AbonnementRecord> {
 
   @override
   bool equals(AbonnementRecord? e1, AbonnementRecord? e2) {
-    return e1?.prefecture == e2?.prefecture && e1?.motif == e2?.motif;
+    return e1?.prefecture == e2?.prefecture &&
+        e1?.motif == e2?.motif &&
+        e1?.sousPrefecture == e2?.sousPrefecture;
   }
 
   @override
   int hash(AbonnementRecord? e) =>
-      const ListEquality().hash([e?.prefecture, e?.motif]);
+      const ListEquality().hash([e?.prefecture, e?.motif, e?.sousPrefecture]);
 
   @override
   bool isValidKey(Object? o) => o is AbonnementRecord;

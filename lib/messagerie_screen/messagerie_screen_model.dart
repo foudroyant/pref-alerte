@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class MessagerieScreenModel extends FlutterFlowModel<MessagerieScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Models for message_autre_component dynamic component.
   late FlutterFlowDynamicModels<MessageAutreComponentModel>
       messageAutreComponentModels;
@@ -23,7 +22,6 @@ class MessagerieScreenModel extends FlutterFlowModel<MessagerieScreenWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     messageAutreComponentModels.dispose();
     messageFocusNode?.dispose();
     messageTextController?.dispose();

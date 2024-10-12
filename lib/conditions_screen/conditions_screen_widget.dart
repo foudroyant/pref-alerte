@@ -23,7 +23,7 @@ class _ConditionsScreenWidgetState extends State<ConditionsScreenWidget> {
     super.initState();
     _model = createModel(context, () => ConditionsScreenModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -36,9 +36,7 @@ class _ConditionsScreenWidgetState extends State<ConditionsScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -62,7 +60,7 @@ class _ConditionsScreenWidgetState extends State<ConditionsScreenWidget> {
           title: Text(
             'Conditions d\'utilisation',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,
@@ -86,7 +84,7 @@ class _ConditionsScreenWidgetState extends State<ConditionsScreenWidget> {
                 ))
                   wrapWithModel(
                     model: _model.conditionsComponentModel1,
-                    updateCallback: () => setState(() {}),
+                    updateCallback: () => safeSetState(() {}),
                     child: const ConditionsComponentWidget(),
                   ),
                 if (responsiveVisibility(
@@ -102,7 +100,7 @@ class _ConditionsScreenWidgetState extends State<ConditionsScreenWidget> {
                       ),
                       child: wrapWithModel(
                         model: _model.conditionsComponentModel2,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const ConditionsComponentWidget(),
                       ),
                     ),

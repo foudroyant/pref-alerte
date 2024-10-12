@@ -46,7 +46,7 @@ class _AjouterMotifComponentWidgetState
     _model.lienTextController2 ??= TextEditingController();
     _model.lienFocusNode2 ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -98,7 +98,7 @@ class _AjouterMotifComponentWidgetState
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                           ),
@@ -330,7 +330,7 @@ class _AjouterMotifComponentWidgetState
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                           ),

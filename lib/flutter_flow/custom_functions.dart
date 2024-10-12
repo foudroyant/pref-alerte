@@ -33,3 +33,12 @@ List<AbonnementModelStruct>? subscribes(
 
   return abonnements;
 }
+
+bool checkPhone(String? numero) {
+  return numero!.startsWith("+33") ||
+          numero.startsWith("+594") ||
+          numero.startsWith("+262") ||
+          numero.startsWith("+590")
+      ? true
+      : false;
+}

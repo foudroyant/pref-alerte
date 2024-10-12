@@ -19,12 +19,14 @@ class MotifStruct extends FFFirebaseStruct {
   String? _lien;
   String get lien => _lien ?? '';
   set lien(String? val) => _lien = val;
+
   bool hasLien() => _lien != null;
 
   // "motif" field.
   String? _motif;
   String get motif => _motif ?? '';
   set motif(String? val) => _motif = val;
+
   bool hasMotif() => _motif != null;
 
   static MotifStruct fromMap(Map<String, dynamic> data) => MotifStruct(

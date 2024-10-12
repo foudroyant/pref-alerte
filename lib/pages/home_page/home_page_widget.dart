@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -24,7 +23,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     super.initState();
     _model = createModel(context, () => HomePageModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -37,9 +36,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -49,57 +46,44 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           title: Text(
             'Pref Alerte',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 30.0,
                   letterSpacing: 0.0,
                 ),
           ),
           actions: [
-            Builder(
-              builder: (context) {
-                if (currentPhoneNumber == '') {
-                  return Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: FlutterFlowTheme.of(context).primary,
-                      borderRadius: 20.0,
-                      borderWidth: 1.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).accent1,
-                      icon: Icon(
-                        Icons.check_circle,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 32.0,
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+              child: FlutterFlowIconButton(
+                borderRadius: 8.0,
+                buttonSize: 40.0,
+                fillColor: FlutterFlowTheme.of(context).primary,
+                icon: Icon(
+                  Icons.search_sharp,
+                  color: FlutterFlowTheme.of(context).info,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  _model.prefs = await queryPrefecturesRecordOnce();
+
+                  context.pushNamed(
+                    'search',
+                    queryParameters: {
+                      'prefectures': serializeParam(
+                        _model.prefs,
+                        ParamType.Document,
+                        isList: true,
                       ),
-                      onPressed: () async {
-                        context.pushNamed('CheckPhone');
-                      },
-                    ),
+                    }.withoutNulls,
+                    extra: <String, dynamic>{
+                      'prefectures': _model.prefs,
+                    },
                   );
-                } else {
-                  return Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderColor: FlutterFlowTheme.of(context).primary,
-                      borderRadius: 20.0,
-                      borderWidth: 1.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).accent1,
-                      icon: Icon(
-                        Icons.change_circle,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        size: 32.0,
-                      ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
-                    ),
-                  );
-                }
-              },
+
+                  safeSetState(() {});
+                },
+              ),
             ),
           ],
           centerTitle: false,
@@ -131,6 +115,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 }
                 List<PrefecturesRecord> listViewPrefecturesRecordList =
                     snapshot.data!;
+
                 return ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,

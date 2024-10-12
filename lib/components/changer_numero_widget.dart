@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'changer_numero_model.dart';
 export 'changer_numero_model.dart';
@@ -28,13 +29,14 @@ class _ChangerNumeroWidgetState extends State<ChangerNumeroWidget> {
     super.initState();
     _model = createModel(context, () => ChangerNumeroModel());
 
-    _model.telephoneTextController1 ??= TextEditingController();
+    _model.telephoneTextController1 ??=
+        TextEditingController(text: currentPhoneNumber);
     _model.telephoneFocusNode1 ??= FocusNode();
 
     _model.telephoneTextController2 ??= TextEditingController();
     _model.telephoneFocusNode2 ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,72 +74,76 @@ class _ChangerNumeroWidgetState extends State<ChangerNumeroWidget> {
                         'Ajouter votre numéro',
                         style:
                             FlutterFlowTheme.of(context).headlineSmall.override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                       ),
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: _model.telephoneTextController1,
-                            focusNode: _model.telephoneFocusNode1,
-                            autofocus: true,
-                            autofillHints: const [AutofillHints.telephoneNumber],
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Numéro de téléphone',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
+                        child: AuthUserStreamWidget(
+                          builder: (context) => SizedBox(
+                            width: double.infinity,
+                            child: TextFormField(
+                              controller: _model.telephoneTextController1,
+                              focusNode: _model.telephoneFocusNode1,
+                              autofocus: true,
+                              autofillHints: const [AutofillHints.telephoneNumber],
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Numéro de téléphone',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Manrope',
+                                      letterSpacing: 0.0,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40.0),
+                                ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: const EdgeInsets.all(24.0),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Manrope',
                                     letterSpacing: 0.0,
                                   ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              filled: true,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              contentPadding: const EdgeInsets.all(24.0),
+                              keyboardType: TextInputType.phone,
+                              cursorColor: FlutterFlowTheme.of(context).primary,
+                              validator: _model
+                                  .telephoneTextController1Validator
+                                  .asValidator(context),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Manrope',
-                                  letterSpacing: 0.0,
-                                ),
-                            keyboardType: TextInputType.phone,
-                            cursorColor: FlutterFlowTheme.of(context).primary,
-                            validator: _model.telephoneTextController1Validator
-                                .asValidator(context),
                           ),
                         ),
                       ),
@@ -148,12 +154,34 @@ class _ChangerNumeroWidgetState extends State<ChangerNumeroWidget> {
                               0.0, 0.0, 0.0, 16.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              await currentUserReference!
-                                  .update(createUsersRecordData(
-                                phoneNumber:
-                                    _model.telephoneTextController1.text,
-                              ));
-                              Navigator.pop(context);
+                              _model.numeroIsGood = await actions.checkNumero(
+                                _model.telephoneTextController1.text,
+                              );
+                              if (_model.numeroIsGood == true) {
+                                await currentUserReference!
+                                    .update(createUsersRecordData(
+                                  phoneNumber:
+                                      _model.telephoneTextController1.text,
+                                ));
+                                Navigator.pop(context);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Vous devez ajouter l\'indicatif de votre pays.',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
+                              }
+
+                              safeSetState(() {});
                             },
                             text: 'Valider',
                             options: FFButtonOptions(
@@ -216,7 +244,7 @@ class _ChangerNumeroWidgetState extends State<ChangerNumeroWidget> {
                         'Ajouter votre numéro',
                         style:
                             FlutterFlowTheme.of(context).headlineSmall.override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Roboto',
                                   letterSpacing: 0.0,
                                 ),
                       ),
@@ -292,12 +320,34 @@ class _ChangerNumeroWidgetState extends State<ChangerNumeroWidget> {
                               0.0, 0.0, 0.0, 16.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              await currentUserReference!
-                                  .update(createUsersRecordData(
-                                phoneNumber:
-                                    _model.telephoneTextController2.text,
-                              ));
-                              Navigator.pop(context);
+                              _model.numeroIsGood2 = await actions.checkNumero(
+                                _model.telephoneTextController2.text,
+                              );
+                              if (_model.numeroIsGood2 == true) {
+                                await currentUserReference!
+                                    .update(createUsersRecordData(
+                                  phoneNumber:
+                                      _model.telephoneTextController2.text,
+                                ));
+                                Navigator.pop(context);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Vous devez ajouter l\'indicatif de votre pays.',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
+                              }
+
+                              safeSetState(() {});
                             },
                             text: 'Valider',
                             options: FFButtonOptions(

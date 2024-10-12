@@ -43,12 +43,11 @@ class _ResumeMessageComponentWidgetState
           isEqualTo: widget.client,
         ),
       );
-      setState(() {
-        _model.messages = _model.lesMessages!.toList().cast<MessagerieRecord>();
-      });
+      _model.messages = _model.lesMessages!.toList().cast<MessagerieRecord>();
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,7 +71,7 @@ class _ResumeMessageComponentWidgetState
                 text: 'Messages : ',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Manrope',
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -123,7 +122,7 @@ class _ResumeMessageComponentWidgetState
                 ),
           ),
         ),
-      ],
+      ].divide(const SizedBox(width: 20.0)),
     );
   }
 }

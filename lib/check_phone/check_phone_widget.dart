@@ -26,7 +26,7 @@ class _CheckPhoneWidgetState extends State<CheckPhoneWidget> {
     _model.otpTextController ??= TextEditingController();
     _model.otpFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,7 +49,7 @@ class _CheckPhoneWidgetState extends State<CheckPhoneWidget> {
           child: Text(
             'Varification',
             style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: FlutterFlowTheme.of(context).info,
                   fontSize: 30.0,
                   letterSpacing: 0.0,
@@ -122,7 +122,7 @@ class _CheckPhoneWidgetState extends State<CheckPhoneWidget> {
                 child: Text(
                   'Verifier votre numéro',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Roboto',
                         fontSize: 30.0,
                         letterSpacing: 0.0,
                       ),

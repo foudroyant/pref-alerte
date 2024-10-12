@@ -32,7 +32,7 @@ class _UpdateComponentWidgetState extends State<UpdateComponentWidget> {
         TextEditingController(text: currentUserDisplayName);
     _model.nomPrenomFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,7 +52,7 @@ class _UpdateComponentWidgetState extends State<UpdateComponentWidget> {
           Text(
             'Modifier votre nom',
             style: FlutterFlowTheme.of(context).headlineSmall.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   letterSpacing: 0.0,
                 ),
           ),

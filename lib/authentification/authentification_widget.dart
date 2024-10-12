@@ -34,7 +34,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
@@ -105,7 +105,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
       ),
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -118,9 +118,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -130,7 +128,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
           title: Text(
             'Pref Alerte',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 30.0,
                   letterSpacing: 0.0,
@@ -208,7 +206,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
-                                          fontFamily: 'Outfit',
+                                          fontFamily: 'Roboto',
                                           fontSize: 25.0,
                                           letterSpacing: 0.0,
                                         ),
@@ -216,7 +214,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
                                         FlutterFlowTheme.of(context)
                                             .displaySmall
                                             .override(
-                                              fontFamily: 'Outfit',
+                                              fontFamily: 'Roboto',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -456,7 +454,8 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
                                                       contentPadding:
                                                           const EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
-                                                        onTap: () => setState(
+                                                        onTap: () =>
+                                                            safeSetState(
                                                           () => _model
                                                                   .passwordVisibility =
                                                               !_model
@@ -1023,7 +1022,8 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
                                                       contentPadding:
                                                           const EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
-                                                        onTap: () => setState(
+                                                        onTap: () =>
+                                                            safeSetState(
                                                           () => _model
                                                                   .passwordCreateVisibility =
                                                               !_model
@@ -1147,7 +1147,8 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
                                                       contentPadding:
                                                           const EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
-                                                        onTap: () => setState(
+                                                        onTap: () =>
+                                                            safeSetState(
                                                           () => _model
                                                                   .passwordConfirmVisibility =
                                                               !_model
@@ -1237,6 +1238,7 @@ class _AuthentificationWidgetState extends State<AuthentificationWidget>
                                                               createUsersRecordData(
                                                             plan: 'FREE',
                                                             app: 'alertepref',
+                                                            credits: 0,
                                                           ));
 
                                                       context.goNamedAuth(

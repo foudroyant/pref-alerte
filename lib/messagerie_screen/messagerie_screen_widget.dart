@@ -35,7 +35,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
     _model.messageTextController ??= TextEditingController();
     _model.messageFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -48,9 +48,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -77,7 +75,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                 return Text(
                   'Le client',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Roboto',
                         color: Colors.white,
                         fontSize: 22.0,
                         letterSpacing: 0.0,
@@ -87,7 +85,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                 return Text(
                   'Service client',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Roboto',
                         color: Colors.white,
                         fontSize: 22.0,
                         letterSpacing: 0.0,
@@ -156,6 +154,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                         }
                         List<MessagerieRecord> listViewMessagerieRecordList =
                             snapshot.data!;
+
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           reverse: true,
@@ -179,7 +178,8 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                                           listViewIndex.toString(),
                                           listViewIndex,
                                         ),
-                                        updateCallback: () => setState(() {}),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
                                         child: MessageAutreComponentWidget(
                                           key: Key(
                                             'Key921_${listViewIndex.toString()}',
@@ -280,7 +280,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                                                                 0.0, 0.0),
                                                     child: Text(
                                                       dateTimeFormat(
-                                                          'd/M H:mm',
+                                                          "d/M H:mm",
                                                           listViewMessagerieRecord
                                                               .date!),
                                                       style: FlutterFlowTheme
@@ -370,7 +370,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                                                   EasyDebounce.debounce(
                                                 '_model.messageTextController',
                                                 const Duration(milliseconds: 200),
-                                                () => setState(() {}),
+                                                () => safeSetState(() {}),
                                               ),
                                               autofocus: true,
                                               textCapitalization:
@@ -521,7 +521,7 @@ class _MessagerieScreenWidgetState extends State<MessagerieScreenWidget> {
                                                         });
                                                       }
 
-                                                      setState(() {
+                                                      safeSetState(() {
                                                         _model
                                                             .messageTextController
                                                             ?.clear();

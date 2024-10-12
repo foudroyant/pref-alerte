@@ -26,7 +26,7 @@ class _ConditionsComponentWidgetState extends State<ConditionsComponentWidget> {
     super.initState();
     _model = createModel(context, () => ConditionsComponentModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

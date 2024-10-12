@@ -17,6 +17,7 @@ class ReponseURLStruct extends FFFirebaseStruct {
   String? _url;
   String get url => _url ?? '';
   set url(String? val) => _url = val;
+
   bool hasUrl() => _url != null;
 
   static ReponseURLStruct fromMap(Map<String, dynamic> data) =>

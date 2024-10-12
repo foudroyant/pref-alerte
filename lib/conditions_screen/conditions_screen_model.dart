@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class ConditionsScreenModel extends FlutterFlowModel<ConditionsScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for conditions_component component.
   late ConditionsComponentModel conditionsComponentModel1;
   // Model for conditions_component component.
@@ -22,7 +21,6 @@ class ConditionsScreenModel extends FlutterFlowModel<ConditionsScreenWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     conditionsComponentModel1.dispose();
     conditionsComponentModel2.dispose();
   }

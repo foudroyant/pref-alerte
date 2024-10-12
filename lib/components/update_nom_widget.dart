@@ -26,7 +26,7 @@ class _UpdateNomWidgetState extends State<UpdateNomWidget> {
     super.initState();
     _model = createModel(context, () => UpdateNomModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -62,7 +62,7 @@ class _UpdateNomWidgetState extends State<UpdateNomWidget> {
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: wrapWithModel(
                 model: _model.updateComponentModel1,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const UpdateComponentWidget(),
               ),
             ),
@@ -88,7 +88,7 @@ class _UpdateNomWidgetState extends State<UpdateNomWidget> {
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: wrapWithModel(
                 model: _model.updateComponentModel2,
-                updateCallback: () => setState(() {}),
+                updateCallback: () => safeSetState(() {}),
                 child: const UpdateComponentWidget(),
               ),
             ),

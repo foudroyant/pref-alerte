@@ -7,7 +7,6 @@ class ServiceClientScreenModel
     extends FlutterFlowModel<ServiceClientScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - Read Document] action in Container widget.
   UsersRecord? user;
 
@@ -15,7 +14,5 @@ class ServiceClientScreenModel
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 }

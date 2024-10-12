@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'prefecture_model.dart';
 export 'prefecture_model.dart';
@@ -30,7 +32,7 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
     super.initState();
     _model = createModel(context, () => PrefectureModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -43,9 +45,7 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,7 +69,7 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
           title: Text(
             'Pref Alerte',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                   letterSpacing: 0.0,
@@ -86,6 +86,7 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
             child: Builder(
               builder: (context) {
                 final motifs = widget.prefecture?.motifs.toList() ?? [];
+
                 return ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
@@ -163,7 +164,10 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
                                                           ?.credits,
                                                       0) >
                                                   0) {
-                                                if (currentPhoneNumber != '') {
+                                                if ((currentPhoneNumber !=
+                                                            '') &&
+                                                    functions.checkPhone(
+                                                        currentPhoneNumber)) {
                                                   var confirmDialogResponse =
                                                       await showDialog<bool>(
                                                             context: context,
@@ -208,6 +212,19 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
                                                         },
                                                       ),
                                                     });
+
+                                                    await AbonnementRecord
+                                                            .createDoc(
+                                                                currentUserReference!)
+                                                        .set(
+                                                            createAbonnementRecordData(
+                                                      prefecture: widget
+                                                          .prefecture
+                                                          ?.prefecture,
+                                                      motif: motifsItem.motif,
+                                                      sousPrefecture: widget
+                                                          .prefecture?.sousPref,
+                                                    ));
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -234,7 +251,7 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
                                                       .showSnackBar(
                                                     SnackBar(
                                                       content: Text(
-                                                        'Vous devez d\'abord ajouter un numéro de telephone',
+                                                        'Vous devez d\'abord ajouter un numéro de telephone ou ajouter  l\'indicatif de votre zone (Exemple : +33 pour la France).',
                                                         style: TextStyle(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
@@ -353,6 +370,13 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
                                                     },
                                                   ),
                                                 });
+                                                await actions
+                                                    .supprimerAbonnement(
+                                                  currentUserReference!,
+                                                  motifsItem.motif,
+                                                  widget
+                                                      .prefecture!.prefecture,
+                                                );
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                   SnackBar(
