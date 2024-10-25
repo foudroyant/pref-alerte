@@ -155,34 +155,38 @@ class _PricingWidgetState extends State<PricingWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              ListTile(
-                                                leading: const Icon(
-                                                  Icons.check,
+                                              Material(
+                                                color: Colors.transparent,
+                                                child: ListTile(
+                                                  leading: const Icon(
+                                                    Icons.check,
+                                                  ),
+                                                  title: Text(
+                                                    columnPricingRecord.plan,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  subtitle: Text(
+                                                    columnPricingRecord.details,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  tileColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  dense: false,
                                                 ),
-                                                title: Text(
-                                                  columnPricingRecord.plan,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                subtitle: Text(
-                                                  columnPricingRecord.details,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                tileColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                dense: false,
                                               ),
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
@@ -204,52 +208,56 @@ class _PricingWidgetState extends State<PricingWidget> {
                                                         final descriptionsItem =
                                                             descriptions[
                                                                 descriptionsIndex];
-                                                        return ListTile(
-                                                          title: Text(
-                                                            descriptionsItem
-                                                                .titre,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .titleLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Outfit',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                          subtitle: Text(
-                                                            descriptionsItem
-                                                                .description,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Manrope',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                          trailing: Icon(
-                                                            Icons
-                                                                .check_box_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .success,
-                                                            size: 30.0,
-                                                          ),
-                                                          tileColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .alternate,
-                                                          dense: false,
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        30.0),
+                                                        return Material(
+                                                          color: Colors
+                                                              .transparent,
+                                                          child: ListTile(
+                                                            title: Text(
+                                                              descriptionsItem
+                                                                  .titre,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .titleLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Outfit',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                            subtitle: Text(
+                                                              descriptionsItem
+                                                                  .description,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Manrope',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                            ),
+                                                            trailing: Icon(
+                                                              Icons
+                                                                  .check_box_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .success,
+                                                              size: 30.0,
+                                                            ),
+                                                            tileColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                            dense: false,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30.0),
+                                                            ),
                                                           ),
                                                         );
                                                       }),
@@ -382,34 +390,37 @@ class _PricingWidgetState extends State<PricingWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          ListTile(
-                                            leading: const Icon(
-                                              Icons.check,
-                                            ),
-                                            title: Text(
-                                              'Plan Starter',
-                                              style:
+                                          Material(
+                                            color: Colors.transparent,
+                                            child: ListTile(
+                                              leading: const Icon(
+                                                Icons.check,
+                                              ),
+                                              title: Text(
+                                                'Plan Starter',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              subtitle: Text(
+                                                '16 € / 20 notifications',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              tileColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                                      .secondaryBackground,
+                                              dense: false,
                                             ),
-                                            subtitle: Text(
-                                              '16 € / 20 notifications',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            tileColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            dense: false,
                                           ),
                                           Padding(
                                             padding:
@@ -418,112 +429,129 @@ class _PricingWidgetState extends State<PricingWidget> {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                ListTile(
-                                                  title: Text(
-                                                    'Notifications push',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Reception de notifications en temps réel',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Notifications push',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Reception de notifications en temps réel',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Accès aux préfectures',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Accès aux préfectures',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Accès à toutes les préfectures et procédures mentionnées sur PrefALERTE.',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    dense: false,
                                                   ),
-                                                  subtitle: Text(
-                                                    'Accès à toutes les préfectures et procédures mentionnées sur PrefALERTE.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground,
-                                                  dense: false,
                                                 ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Service client',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Service client',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Support client par mail, message instantané et appel.',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    dense: false,
                                                   ),
-                                                  subtitle: Text(
-                                                    'Support client par mail, message instantané et appel.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground,
-                                                  dense: false,
                                                 ),
                                               ],
                                             ),
@@ -616,38 +644,40 @@ class _PricingWidgetState extends State<PricingWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          ListTile(
-                                            leading: const Icon(
-                                              Icons.check,
-                                            ),
-                                            title: Text(
-                                              'Plan Pro',
-                                              style:
+                                          Material(
+                                            color: Colors.transparent,
+                                            child: ListTile(
+                                              leading: const Icon(
+                                                Icons.check,
+                                              ),
+                                              title: Text(
+                                                'Plan Pro',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              subtitle: Text(
+                                                '28 € / 25 sms',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              tileColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                                      .secondaryBackground,
+                                              dense: false,
                                             ),
-                                            subtitle: Text(
-                                              '28 € / 25 sms',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            tileColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            dense: false,
                                           ),
                                           Padding(
                                             padding:
@@ -656,160 +686,188 @@ class _PricingWidgetState extends State<PricingWidget> {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                ListTile(
-                                                  title: Text(
-                                                    'Notifications push',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Notification Push en temps réel sur votre téléphone',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Notifications SMS',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Notification en temps réel via SMS',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Notifications push',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Notification Push en temps réel sur votre téléphone',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Accès aux préfectures',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Accès à toutes les préfectures et procédures mentionnées sur PrefALERTE.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Notifications SMS',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Notification en temps réel via SMS',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Service client',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Accès aux préfectures',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Accès à toutes les préfectures et procédures mentionnées sur PrefALERTE.',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
-                                                  subtitle: Text(
-                                                    'Support client par mail, par message instantané et appel.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Service client',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Support client par mail, par message instantané et appel.',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -903,38 +961,40 @@ class _PricingWidgetState extends State<PricingWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          ListTile(
-                                            leading: const Icon(
-                                              Icons.check,
-                                            ),
-                                            title: Text(
-                                              'Plan Premium',
-                                              style:
+                                          Material(
+                                            color: Colors.transparent,
+                                            child: ListTile(
+                                              leading: const Icon(
+                                                Icons.check,
+                                              ),
+                                              title: Text(
+                                                'Plan Premium',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              subtitle: Text(
+                                                '51 € / 50 sms',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              tileColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                                      .secondaryBackground,
+                                              dense: false,
                                             ),
-                                            subtitle: Text(
-                                              '51 € / 50 sms',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            tileColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            dense: false,
                                           ),
                                           Padding(
                                             padding:
@@ -943,160 +1003,188 @@ class _PricingWidgetState extends State<PricingWidget> {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                ListTile(
-                                                  title: Text(
-                                                    'Notifications push',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Notification Push en temps réel sur votre téléphone',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                  ),
-                                                ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Notifications SMS',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Notification en temps réel via SMS',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Notifications push',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Notification Push en temps réel sur votre téléphone',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Accès aux préfectures',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Accès à toutes les préfectures et procédures mentionnées sur PrefALERTE.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Notifications SMS',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Notification en temps réel via SMS',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
-                                                ListTile(
-                                                  title: Text(
-                                                    'Service client',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          letterSpacing: 0.0,
-                                                        ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Accès aux préfectures',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Accès à toutes les préfectures et procédures mentionnées sur PrefALERTE.',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
-                                                  subtitle: Text(
-                                                    'Support client par mail, par message instantané et appel.',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily: 'Manrope',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                  trailing: Icon(
-                                                    Icons.check_box_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 30.0,
-                                                  ),
-                                                  tileColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .alternate,
-                                                  dense: false,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
+                                                ),
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  child: ListTile(
+                                                    title: Text(
+                                                      'Service client',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily:
+                                                                'Outfit',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    subtitle: Text(
+                                                      'Support client par mail, par message instantané et appel.',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Manrope',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                    trailing: Icon(
+                                                      Icons.check_box_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .success,
+                                                      size: 30.0,
+                                                    ),
+                                                    tileColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                    dense: false,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30.0),
+                                                    ),
                                                   ),
                                                 ),
                                               ],

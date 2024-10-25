@@ -117,34 +117,38 @@ class _PrefectureWidgetState extends State<PrefectureWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  ListTile(
-                                    leading: const Icon(
-                                      Icons.check_sharp,
+                                  Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      leading: const Icon(
+                                        Icons.check_sharp,
+                                      ),
+                                      title: Text(
+                                        widget.prefecture!.sousPref,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              fontSize: 20.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        motifsItem.motif,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
                                     ),
-                                    title: Text(
-                                      widget.prefecture!.sousPref,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                            fontSize: 20.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    subtitle: Text(
-                                      motifsItem.motif,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Manrope',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
                                   ),
                                   Builder(
                                     builder: (context) {

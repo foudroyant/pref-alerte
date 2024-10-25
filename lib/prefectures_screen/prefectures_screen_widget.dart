@@ -344,36 +344,42 @@ class _PrefecturesScreenWidgetState extends State<PrefecturesScreenWidget> {
                                             ),
                                           ],
                                         ),
-                                        child: ListTile(
-                                          title: Text(
-                                            listViewPrefecturesRecord
-                                                .prefecture,
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  letterSpacing: 0.0,
-                                                ),
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: ListTile(
+                                            title: Text(
+                                              listViewPrefecturesRecord
+                                                  .prefecture,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleLarge
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            subtitle: Text(
+                                              '${listViewPrefecturesRecord.sousPref}(${listViewPrefecturesRecord.indicatif})',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            trailing: Icon(
+                                              Icons.arrow_forward_ios,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 20.0,
+                                            ),
+                                            tileColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            dense: false,
                                           ),
-                                          subtitle: Text(
-                                            '${listViewPrefecturesRecord.sousPref}(${listViewPrefecturesRecord.indicatif})',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Manrope',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          trailing: Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 20.0,
-                                          ),
-                                          tileColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          dense: false,
                                         ),
                                       ),
                                     ),
@@ -824,35 +830,41 @@ class _PrefecturesScreenWidgetState extends State<PrefecturesScreenWidget> {
                                             ),
                                           ],
                                         ),
-                                        child: ListTile(
-                                          title: Text(
-                                            prefItem.prefecture,
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  letterSpacing: 0.0,
-                                                ),
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: ListTile(
+                                            title: Text(
+                                              prefItem.prefecture,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleLarge
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            subtitle: Text(
+                                              '${prefItem.prefecture}(${prefItem.indicatif})',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                            trailing: Icon(
+                                              Icons.arrow_forward_ios,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 20.0,
+                                            ),
+                                            tileColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            dense: false,
                                           ),
-                                          subtitle: Text(
-                                            '${prefItem.prefecture}(${prefItem.indicatif})',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Manrope',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          trailing: Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 20.0,
-                                          ),
-                                          tileColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          dense: false,
                                         ),
                                       ),
                                     ),

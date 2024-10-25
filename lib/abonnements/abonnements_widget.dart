@@ -143,33 +143,36 @@ class _AbonnementsWidgetState extends State<AbonnementsWidget> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  child: ListTile(
-                                    title: Text(
-                                      abonnementsItem.prefecture,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
-                                          ),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        abonnementsItem.prefecture,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        abonnementsItem.motif,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
+                                      contentPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              16.0, 0.0, 0.0, 0.0),
                                     ),
-                                    subtitle: Text(
-                                      abonnementsItem.motif,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Manrope',
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 0.0, 0.0),
                                   ),
                                 ),
                               ),
@@ -196,33 +199,36 @@ class _AbonnementsWidgetState extends State<AbonnementsWidget> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  child: ListTile(
-                                    title: Text(
-                                      abonnementsItem.prefecture,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
-                                          ),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        abonnementsItem.prefecture,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        abonnementsItem.motif,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
+                                      contentPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              16.0, 0.0, 0.0, 0.0),
                                     ),
-                                    subtitle: Text(
-                                      abonnementsItem.motif,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Manrope',
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 0.0, 0.0),
                                   ),
                                 ),
                               ),

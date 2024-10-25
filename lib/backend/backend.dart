@@ -11,6 +11,7 @@ import 'schema/abonnement_record.dart';
 import 'schema/messagerie_record.dart';
 import 'schema/pricing_record.dart';
 import 'schema/suppression_record.dart';
+import 'schema/indicatifs_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -25,6 +26,7 @@ export 'schema/abonnement_record.dart';
 export 'schema/messagerie_record.dart';
 export 'schema/pricing_record.dart';
 export 'schema/suppression_record.dart';
+export 'schema/indicatifs_record.dart';
 
 /// Functions to query PrefecturesRecords (as a Stream and as a Future).
 Future<int> queryPrefecturesRecordCount({
@@ -246,6 +248,43 @@ Future<List<SuppressionRecord>> querySuppressionRecordOnce({
     queryCollectionOnce(
       SuppressionRecord.collection,
       SuppressionRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query IndicatifsRecords (as a Stream and as a Future).
+Future<int> queryIndicatifsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      IndicatifsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<IndicatifsRecord>> queryIndicatifsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      IndicatifsRecord.collection,
+      IndicatifsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<IndicatifsRecord>> queryIndicatifsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      IndicatifsRecord.collection,
+      IndicatifsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

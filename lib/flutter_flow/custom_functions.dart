@@ -42,3 +42,24 @@ bool checkPhone(String? numero) {
       ? true
       : false;
 }
+
+List<String> indicatifs(List<PrefecturesRecord>? prefectures) {
+  final List<String> _indicatifs = [];
+  prefectures!.forEach(
+    (e) {
+      if (_indicatifs.contains(e.indicatif)) {
+        _indicatifs.add(e.indicatif);
+      }
+      ;
+    },
+  );
+
+  return _indicatifs;
+}
+
+String setNumComplet(
+  String code,
+  String telephone,
+) {
+  return code + telephone;
+}

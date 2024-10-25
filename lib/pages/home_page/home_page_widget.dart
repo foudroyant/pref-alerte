@@ -1,8 +1,10 @@
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -23,6 +25,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     super.initState();
     _model = createModel(context, () => HomePageModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.lesPrefectures = await queryPrefecturesRecordOnce(
+        queryBuilder: (prefecturesRecord) =>
+            prefecturesRecord.orderBy('prefecture'),
+      );
+      _model.prefectures =
+          _model.lesPrefectures!.toList().cast<PrefecturesRecord>();
+      _model.prefDisplay =
+          _model.prefectures.toList().cast<PrefecturesRecord>();
+      safeSetState(() {});
+    });
+
+    _model.queryTextController ??= TextEditingController();
+    _model.queryFocusNode ??= FocusNode();
+    _model.queryFocusNode!.addListener(
+      () async {
+        _model.prefDisplay =
+            _model.prefectures.toList().cast<PrefecturesRecord>();
+        safeSetState(() {});
+      },
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -39,7 +63,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
@@ -52,212 +76,222 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-              child: FlutterFlowIconButton(
-                borderRadius: 8.0,
-                buttonSize: 40.0,
-                fillColor: FlutterFlowTheme.of(context).primary,
-                icon: Icon(
-                  Icons.search_sharp,
-                  color: FlutterFlowTheme.of(context).info,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  _model.prefs = await queryPrefecturesRecordOnce();
-
-                  context.pushNamed(
-                    'search',
-                    queryParameters: {
-                      'prefectures': serializeParam(
-                        _model.prefs,
-                        ParamType.Document,
-                        isList: true,
-                      ),
-                    }.withoutNulls,
-                    extra: <String, dynamic>{
-                      'prefectures': _model.prefs,
-                    },
-                  );
-
-                  safeSetState(() {});
-                },
-              ),
-            ),
-          ],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(6.0, 12.0, 6.0, 12.0),
-            child: StreamBuilder<List<PrefecturesRecord>>(
-              stream: queryPrefecturesRecord(
-                queryBuilder: (prefecturesRecord) =>
-                    prefecturesRecord.orderBy('prefecture'),
-              ),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          FlutterFlowTheme.of(context).primary,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-                List<PrefecturesRecord> listViewPrefecturesRecordList =
-                    snapshot.data!;
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
+                child: TextFormField(
+                  controller: _model.queryTextController,
+                  focusNode: _model.queryFocusNode,
+                  onChanged: (_) => EasyDebounce.debounce(
+                    '_model.queryTextController',
+                    const Duration(milliseconds: 2000),
+                    () async {
+                      _model.prefecturesOutput =
+                          await actions.rechercherPrefecture(
+                        _model.queryTextController.text,
+                        _model.prefectures.toList(),
+                      );
+                      _model.prefsBySearch = _model.prefecturesOutput!
+                          .toList()
+                          .cast<PrefecturesRecord>();
+                      _model.prefDisplay = _model.prefsBySearch
+                          .toList()
+                          .cast<PrefecturesRecord>();
+                      safeSetState(() {});
 
-                return ListView.builder(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.vertical,
-                  itemCount: listViewPrefecturesRecordList.length,
-                  itemBuilder: (context, listViewIndex) {
-                    final listViewPrefecturesRecord =
-                        listViewPrefecturesRecordList[listViewIndex];
-                    return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        if (responsiveVisibility(
-                          context: context,
-                          tablet: false,
-                          tabletLandscape: false,
-                          desktop: false,
-                        ))
-                          Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            elevation: 4.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                      safeSetState(() {});
+                    },
+                  ),
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    isDense: false,
+                    labelText: 'Rechercher une prefecture',
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Manrope',
+                              letterSpacing: 0.0,
                             ),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(
-                                  'prefecture',
-                                  queryParameters: {
-                                    'prefecture': serializeParam(
-                                      listViewPrefecturesRecord,
-                                      ParamType.Document,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'prefecture': listViewPrefecturesRecord,
-                                  },
-                                );
-                              },
-                              child: ListTile(
-                                leading: const Icon(
-                                  Icons.check_sharp,
-                                ),
-                                title: Text(
-                                  listViewPrefecturesRecord.prefecture,
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                subtitle: Text(
-                                  listViewPrefecturesRecord.sousPref,
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Manrope',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                tileColor: FlutterFlowTheme.of(context)
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primary,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    filled: true,
+                    fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                    prefixIcon: Icon(
+                      Icons.search_outlined,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                    ),
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Manrope',
+                        letterSpacing: 0.0,
+                      ),
+                  maxLines: null,
+                  validator:
+                      _model.queryTextControllerValidator.asValidator(context),
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
+                    child: Text(
+                      'Prefectures trouvées',
+                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                            fontFamily: 'Manrope',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(4.0, 12.0, 16.0, 0.0),
+                    child: Text(
+                      _model.prefsBySearch.length.toString(),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Manrope',
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(6.0, 12.0, 6.0, 12.0),
+                  child: Builder(
+                    builder: (context) {
+                      final prefItem = _model.prefDisplay.toList();
+
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: prefItem.length,
+                        itemBuilder: (context, prefItemIndex) {
+                          final prefItemItem = prefItem[prefItemIndex];
+                          return Container(
+                            width: () {
+                              if (MediaQuery.sizeOf(context).width <
+                                  kBreakpointSmall) {
+                                return MediaQuery.sizeOf(context).width;
+                              } else if (MediaQuery.sizeOf(context).width <
+                                  kBreakpointMedium) {
+                                return MediaQuery.sizeOf(context).width;
+                              } else {
+                                return (MediaQuery.sizeOf(context).width * 0.5);
+                              }
+                            }(),
+                            decoration: const BoxDecoration(),
+                            child: Visibility(
+                              visible: responsiveVisibility(
+                                context: context,
+                                tablet: false,
+                                tabletLandscape: false,
+                                desktop: false,
+                              ),
+                              child: Card(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                dense: false,
-                              ),
-                            ),
-                          ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.5,
-                          decoration: const BoxDecoration(),
-                          child: Visibility(
-                            visible: responsiveVisibility(
-                              context: context,
-                              phone: false,
-                            ),
-                            child: Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 4.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed(
-                                    'prefecture',
-                                    queryParameters: {
-                                      'prefecture': serializeParam(
-                                        listViewPrefecturesRecord,
-                                        ParamType.Document,
+                                elevation: 4.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'prefecture',
+                                      queryParameters: {
+                                        'prefecture': serializeParam(
+                                          prefItemItem,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'prefecture': prefItemItem,
+                                      },
+                                    );
+                                  },
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      leading: const Icon(
+                                        Icons.check_sharp,
                                       ),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      'prefecture': listViewPrefecturesRecord,
-                                    },
-                                  );
-                                },
-                                child: ListTile(
-                                  leading: const Icon(
-                                    Icons.check_sharp,
+                                      title: Text(
+                                        prefItemItem.prefecture,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        prefItemItem.sousPref,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
+                                    ),
                                   ),
-                                  title: Text(
-                                    listViewPrefecturesRecord.prefecture,
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                  subtitle: Text(
-                                    listViewPrefecturesRecord.sousPref,
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Manrope',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                  tileColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  dense: false,
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

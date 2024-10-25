@@ -241,31 +241,34 @@ class _MotifsScreenWidgetState extends State<MotifsScreenWidget> {
                               ),
                             ],
                           ),
-                          child: ListTile(
-                            leading: const Icon(
-                              Icons.list_rounded,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: ListTile(
+                              leading: const Icon(
+                                Icons.list_rounded,
+                              ),
+                              title: Text(
+                                baMotifsItem.motif,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              subtitle: Text(
+                                baMotifsItem.lien,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Manrope',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              dense: false,
                             ),
-                            title: Text(
-                              baMotifsItem.motif,
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                            subtitle: Text(
-                              baMotifsItem.lien,
-                              style: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Manrope',
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                            tileColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            dense: false,
                           ),
                         ),
                       if (responsiveVisibility(

@@ -213,63 +213,69 @@ class _AuthentificationCopyWidgetState extends State<AuthentificationCopyWidget>
                                           ),
                                     ),
                                   ),
-                                  ListTile(
-                                    title: Text(
-                                      'Pourquoi choisir PrefALERTE ? 🤔',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            letterSpacing: 0.0,
-                                          ),
+                                  Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        'Pourquoi choisir PrefALERTE ? 🤔',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        '🚀 Instantanéité : Recevez des notifications en temps réel dès qu\'un créneau est disponible.\n\n🎯 Simplicité : Plus besoin de surveiller constamment le site de la préfecture, nous faisons le travail pour vous.\n\n👌 Personnalisé : Choisissez vos préférences de notification pour correspondre à votre emploi du temps et à vos besoins.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 20.0,
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
                                     ),
-                                    subtitle: Text(
-                                      '🚀 Instantanéité : Recevez des notifications en temps réel dès qu\'un créneau est disponible.\n\n🎯 Simplicité : Plus besoin de surveiller constamment le site de la préfecture, nous faisons le travail pour vous.\n\n👌 Personnalisé : Choisissez vos préférences de notification pour correspondre à votre emploi du temps et à vos besoins.',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Manrope',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    trailing: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 20.0,
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
                                   ),
-                                  ListTile(
-                                    title: Text(
-                                      'Comment ça marche ? 🤔',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            letterSpacing: 0.0,
-                                          ),
+                                  Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        'Comment ça marche ? 🤔',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        '1. Inscrivez-vous : Créez un compte en quelques clics et sélectionnez vos préférences de notification.\n\n2. Abonnez-vous : Choisissez la préfecture et le motif auquel vous dépendez, le service d\'abonnement qui vous convient le mieux.\n\n3. Recevez des notifications : Détendez-vous et laissez-nous vous informer dès qu\'un créneau se libère en temps réel.\n\nNe manquez plus jamais une opportunité de rendez-vous en préfecture. Inscrivez-vous dès aujourd\'hui et simplifiez votre vie administrative ! 📅',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Manrope',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 20.0,
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
                                     ),
-                                    subtitle: Text(
-                                      '1. Inscrivez-vous : Créez un compte en quelques clics et sélectionnez vos préférences de notification.\n\n2. Abonnez-vous : Choisissez la préfecture et le motif auquel vous dépendez, le service d\'abonnement qui vous convient le mieux.\n\n3. Recevez des notifications : Détendez-vous et laissez-nous vous informer dès qu\'un créneau se libère en temps réel.\n\nNe manquez plus jamais une opportunité de rendez-vous en préfecture. Inscrivez-vous dès aujourd\'hui et simplifiez votre vie administrative ! 📅',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Manrope',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    trailing: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 20.0,
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
                                   ),
                                 ],
                               ),
